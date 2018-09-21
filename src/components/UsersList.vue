@@ -20,7 +20,7 @@
         <td>
           <div class="image is-48x48">
             <img
-              :src="user.photo || 'default-photo.jpg'"
+              :src="user.photo || 'https://i.imgur.com/aPwd0ES.jpg'"
               class="is-rounded"
               alt="">
           </div>

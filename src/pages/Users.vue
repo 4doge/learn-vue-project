@@ -17,6 +17,7 @@
 <script>
 import axios from 'axios';
 import UsersList from '@/components/UsersList.vue';
+import { apiHost } from '@/config.js';
 
 export default {
   name: 'UsersPage',
@@ -46,7 +47,7 @@ export default {
   methods: {
     loadUsers() {
       axios
-        .get('http://localhost:9999/users')
+        .get(`${apiHost}/users`)
         .then(response => {
           this.users = response.data;
         })
