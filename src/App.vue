@@ -22,6 +22,10 @@
             class="navbar-item" 
             exact-active-class="is-active">Users</router-link>
           <router-link
+            to="/users/new"
+            class="navbar-item"
+            exact-active-class="is-active">Add new user</router-link>
+          <router-link
             to="/about"
             class="navbar-item" 
             exact-active-class="is-active">About</router-link>

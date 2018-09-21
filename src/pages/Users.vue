@@ -42,10 +42,10 @@ export default {
     }
   },
   mounted() {
-    this.loadUsers();
+    this.listUsers();
   },
   methods: {
-    loadUsers() {
+    listUsers() {
       axios
         .get(`${apiHost}/users`)
         .then(response => {

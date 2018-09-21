@@ -11,6 +11,7 @@
         <th>Phone</th>
         <th></th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -39,9 +40,15 @@
             type="button">Copy</button>
         </td>
         <td>
-          <!--<a v-bind:href="'?user.id=' + user.id">-->
-          <!--</a>-->
-          <!--<edit-user :user="user"/>-->
+          <router-link
+            :to="{ name: 'editUser', params: { id: user.id }}"
+            class="button is-outlined is-info">Edit</router-link>
+        </td>
+        <td>
+          <button
+            class="button is-outlined is-danger"
+            type="button"
+            @click="deleteUser(user.id)">Delete</button>
         </td>
       </tr>
     </tbody>
@@ -49,7 +56,9 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { capitalize } from '@/utils.js';
+import { apiHost } from '@/config.js';
 
 export default {
   name: 'UsersList',
@@ -70,6 +79,20 @@ export default {
     },
     getCopyData(first_name, last_name) {
       return `${capitalize(first_name)} ${capitalize(last_name)}`;
+    },
+    deleteUser(id) {
+      axios
+        .delete(`${apiHost}/users/${id}`)
+        .then(response => {
+          if (response.status === 200) {
+            this.users.splice(this.users.findIndex(user => user.id === id), 1);
+          } else {
+            console.log(response.status);
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 };
