@@ -1,7 +1,37 @@
 <template>
   <div id="app">
-    <router-link to="/">Home</router-link>
-    <router-link to="/about">About</router-link>
-    <router-view/>
+    <nav
+      class="navbar is-dark"
+      role="navigation"
+      aria-label="main navigation">
+      <div class="navbar-brand">
+        <a
+          class="navbar-item"
+          href="/">
+          <img src="https://vuejs.org/images/logo.png">
+        </a>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <router-link
+            to="/"
+            class="navbar-item" 
+            exact-active-class="is-active">Home</router-link>
+          <router-link
+            to="/users"
+            class="navbar-item" 
+            exact-active-class="is-active">Users</router-link>
+          <router-link
+            to="/about"
+            class="navbar-item" 
+            exact-active-class="is-active">About</router-link>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="content">
+        <router-view/>
+      </div>
+    </div>
   </div>
 </template>
