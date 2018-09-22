@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import NProgress from 'nprogress';
 import Home from './pages/Home.vue';
 import About from './pages/About.vue';
 import Users from './pages/Users.vue';
@@ -8,7 +9,7 @@ import AddUser from './components/AddUser.vue';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -38,3 +39,16 @@ export default new Router({
     }
   ]
 });
+
+router.beforeResolve((to, from, next) => {
+  if (to.name) {
+    NProgress.start();
+  }
+  next();
+});
+
+router.afterEach(() => {
+  NProgress.done();
+});
+
+export default router;

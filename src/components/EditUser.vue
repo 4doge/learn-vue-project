@@ -6,8 +6,7 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { apiHost } from '@/config.js';
+import http from '@/utils/http.js';
 
 export default {
   name: 'EditUser',
@@ -19,8 +18,8 @@ export default {
   },
   methods: {
     getUser() {
-      axios
-        .get(`${apiHost}/users/${this.$route.params.id}`)
+      http
+        .get(`/users/${this.$route.params.id}`)
         .then(response => {
           this.user = response.data;
         })

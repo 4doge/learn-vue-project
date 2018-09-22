@@ -15,9 +15,8 @@
 </template>
 
 <script>
-import axios from 'axios';
 import UsersList from '@/components/UsersList.vue';
-import { apiHost } from '@/config.js';
+import http from '@/utils/http.js';
 
 export default {
   name: 'UsersPage',
@@ -46,8 +45,8 @@ export default {
   },
   methods: {
     listUsers() {
-      axios
-        .get(`${apiHost}/users`)
+      http
+        .get(`/users`)
         .then(response => {
           this.users = response.data;
         })

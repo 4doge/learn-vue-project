@@ -15,11 +15,11 @@
         <div class="navbar-start">
           <router-link
             to="/"
-            class="navbar-item" 
+            class="navbar-item"
             exact-active-class="is-active">Home</router-link>
           <router-link
             to="/users"
-            class="navbar-item" 
+            class="navbar-item"
             exact-active-class="is-active">Users</router-link>
           <router-link
             to="/users/new"
@@ -27,7 +27,7 @@
             exact-active-class="is-active">Add new user</router-link>
           <router-link
             to="/about"
-            class="navbar-item" 
+            class="navbar-item"
             exact-active-class="is-active">About</router-link>
         </div>
       </div>
@@ -39,3 +39,7 @@
     </div>
   </div>
 </template>
+
+<style>
+@import '~nprogress/nprogress.css';
+</style>

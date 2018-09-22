@@ -56,9 +56,8 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { capitalize } from '@/utils.js';
-import { apiHost } from '@/config.js';
+import http from '@/utils/http.js';
+import capitalize from '@/utils/capitalize.js';
 
 export default {
   name: 'UsersList',
@@ -81,8 +80,8 @@ export default {
       return `${capitalize(first_name)} ${capitalize(last_name)}`;
     },
     deleteUser(id) {
-      axios
-        .delete(`${apiHost}/users/${id}`)
+      http
+        .delete(`/users/${id}`)
         .then(response => {
           if (response.status === 200) {
             this.users.splice(this.users.findIndex(user => user.id === id), 1);
