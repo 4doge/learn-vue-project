@@ -92,7 +92,7 @@
             </div>
             <div class="field">
               <label
-                for="phone"
+                for="address"
                 class="label">Address</label>
               <div class="control">
                 <input
@@ -105,12 +105,12 @@
             </div>
             <div class="field">
               <label
-                for="phone"
+                for="registered"
                 class="label">Registered</label>
               <div class="control">
                 <input
                   id="registered"
-                  v-model="user.phone"
+                  v-model="user.registered"
                   class="input is-small"
                   name="registered"
                   type="text">
