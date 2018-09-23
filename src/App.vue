@@ -29,6 +29,10 @@
             to="/about"
             class="navbar-item"
             exact-active-class="is-active">About</router-link>
+          <router-link
+            to="/settings"
+            class="navbar-item"
+            exact-active-class="is-active">Settings</router-link>
         </div>
       </div>
     </nav>

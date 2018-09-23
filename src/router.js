@@ -4,6 +4,7 @@ import NProgress from 'nprogress';
 import Home from './pages/Home.vue';
 import About from './pages/About.vue';
 import Users from './pages/Users.vue';
+import Settings from './pages/Settings.vue';
 import EditUser from './components/EditUser.vue';
 import AddUser from './components/AddUser.vue';
 
@@ -25,7 +26,16 @@ const router = new Router({
     {
       path: '/users',
       name: 'users',
-      component: Users
+      component: Users,
+      beforeEnter: (to, from, next) => {
+        if (localStorage.getItem('token')) {
+          next();
+        } else {
+          router.push({
+            name: 'settings'
+          });
+        }
+      }
     },
     {
       path: '/users/new',
@@ -36,6 +46,11 @@ const router = new Router({
       path: '/users/:id',
       name: 'editUser',
       component: EditUser
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: Settings
     }
   ]
 });

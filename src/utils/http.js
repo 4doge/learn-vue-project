@@ -3,7 +3,10 @@ import NProgress from 'nprogress';
 import { apiHost } from '@/config.js';
 
 const http = axios.create({
-  baseURL: apiHost
+  baseURL: apiHost,
+  headers: {
+    Authorization: localStorage.getItem('token')
+  }
 });
 
 http.interceptors.request.use(config => {
