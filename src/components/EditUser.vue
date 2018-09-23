@@ -10,8 +10,8 @@
           class="user">
           <h1>Edit user</h1>
           <form
-            action="#">
-            <!--@submit.prevent="updateUser(user)">-->
+            action="#"
+            @submit.prevent="updateUser(user)">
             <div class="field">
               <label
                 for="firstName"
@@ -129,6 +129,20 @@
                   type="text">
               </div>
             </div>
+            <div class="field">
+              <label
+                for="isActive"
+                class="label">Is active</label>
+              <div class="control">
+                <input
+                  id="isActive"
+                  v-model="user.isActive"
+                  class="checkbox is-small"
+                  name="isActive"
+                  type="checkbox">
+              </div>
+            </div>
+            {{ user.isActive }}
             <button
               class="button is-outlined is-info"
               type="submit">Update</button>
@@ -141,6 +155,7 @@
 
 <script>
 import http from '@/utils/http.js';
+import router from '@/router.js';
 
 export default {
   name: 'EditUser',
@@ -160,6 +175,22 @@ export default {
         })
         .catch(error => {
           this.errorMessage = error.response.statusText;
+        });
+    },
+    updateUser() {
+      http
+        .put(`/users/${this.$route.params.id}`, this.user)
+        .then(response => {
+          if (response.status === 200) {
+            router.push({
+              name: 'users'
+            });
+          } else {
+            console.log(response.statusText);
+          }
+        })
+        .catch(error => {
+          console.log(error);
         });
     }
   }
