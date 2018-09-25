@@ -1,7 +1,7 @@
 <template>
   <div class="columns">
     <div class="column is-one-third">
-      <h1>Add user</h1>
+      <h1 class="title is-1">Add user</h1>
       <div v-if="user">
         <user-form :user="user"/>
         <button

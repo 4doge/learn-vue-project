@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Manage Authorization header</h1>
+    <h1 class="title is-1">Manage Authorization header</h1>
     <button
       class="button is-outlined is-info"
       type="button"

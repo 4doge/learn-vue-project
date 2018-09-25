@@ -33,9 +33,7 @@
       </div>
     </nav>
     <div class="container">
-      <div class="content">
-        <router-view/>
-      </div>
+      <router-view/>
     </div>
   </div>
 </template>
