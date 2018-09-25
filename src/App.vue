@@ -5,34 +5,30 @@
       role="navigation"
       aria-label="main navigation">
       <div class="navbar-brand">
-        <a
+        <router-link 
+          to="/" 
           class="navbar-item"
-          href="/">
+          exact-active-class="">
           <img src="https://vuejs.org/images/logo.png">
-        </a>
+        </router-link>
       </div>
       <div class="navbar-menu">
         <div class="navbar-start">
           <router-link
             to="/"
-            class="navbar-item"
-            exact-active-class="is-active">Home</router-link>
+            class="navbar-item">Home</router-link>
           <router-link
             to="/users"
-            class="navbar-item"
-            exact-active-class="is-active">Users</router-link>
+            class="navbar-item">Users</router-link>
           <router-link
             to="/users/new"
-            class="navbar-item"
-            exact-active-class="is-active">Add new user</router-link>
+            class="navbar-item">Add new user</router-link>
           <router-link
             to="/about"
-            class="navbar-item"
-            exact-active-class="is-active">About</router-link>
+            class="navbar-item">About</router-link>
           <router-link
             to="/settings"
-            class="navbar-item"
-            exact-active-class="is-active">Settings</router-link>
+            class="navbar-item">Settings</router-link>
         </div>
       </div>
     </nav>
