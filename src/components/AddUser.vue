@@ -159,14 +159,10 @@ export default {
     addUser() {
       http
         .post('/users', this.user)
-        .then(response => {
-          if (response.status === 201) {
-            router.push({
-              name: 'users'
-            });
-          } else {
-            console.log(response.statusText);
-          }
+        .then(() => {
+          router.push({
+            name: 'users'
+          });
         })
         .catch(error => {
           console.log(error);

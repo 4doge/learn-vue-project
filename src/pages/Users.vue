@@ -2,8 +2,9 @@
   <div>
     <h1>Users - {{ usersLength }}</h1>
     <users-list
-      v-if="showUsersTable"
-      :users="users"></users-list>
+      v-if="showUsersTable && users.length"
+      :users="users"/>
+    <div v-if="!users.length">Loading ...</div>
     <button
       v-tooltip.right-start="{ content: 'Table showing option', offset: 10 }"
       class="button is-outlined is-info"
@@ -47,9 +48,7 @@ export default {
     listUsers() {
       http
         .get(`/users`)
-        .then(response => {
-          this.users = response.data;
-        })
+        .then(response => (this.users = response.data))
         .catch(error => {
           console.log(error);
         });

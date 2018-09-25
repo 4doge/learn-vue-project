@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import NProgress from 'nprogress';
-import Home from './pages/Home.vue';
-import About from './pages/About.vue';
-import Users from './pages/Users.vue';
-import Settings from './pages/Settings.vue';
-import EditUser from './components/EditUser.vue';
-import AddUser from './components/AddUser.vue';
+import Home from '@/pages/Home.vue';
+import About from '@/pages/About.vue';
+import Users from '@/pages/Users.vue';
+import Settings from '@/pages/Settings.vue';
+import EditUser from '@/components/EditUser.vue';
+import AddUser from '@/components/AddUser.vue';
 
 Vue.use(Router);
 
@@ -27,14 +27,8 @@ const router = new Router({
       path: '/users',
       name: 'users',
       component: Users,
-      beforeEnter: (to, from, next) => {
-        if (localStorage.getItem('token')) {
-          next();
-        } else {
-          router.push({
-            name: 'settings'
-          });
-        }
+      meta: {
+        requireAuth: true
       }
     },
     {
@@ -53,6 +47,20 @@ const router = new Router({
       component: Settings
     }
   ]
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requireAuth)) {
+    if (localStorage.getItem('token')) {
+      next();
+    } else {
+      next({
+        path: '/settings'
+      });
+    }
+  } else {
+    next();
+  }
 });
 
 router.beforeResolve((to, from, next) => {

@@ -9,9 +9,9 @@
         <th>Age</th>
         <th>Email</th>
         <th>Phone</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th/>
+        <th/>
+        <th/>
       </tr>
     </thead>
     <tbody>
@@ -62,9 +62,7 @@ import capitalize from '@/utils/capitalize.js';
 export default {
   name: 'UsersList',
   filters: {
-    capitalize(value) {
-      return capitalize(value);
-    }
+    capitalize: value => capitalize(value)
   },
   props: {
     users: {
@@ -82,12 +80,8 @@ export default {
     deleteUser(id) {
       http
         .delete(`/users/${id}`)
-        .then(response => {
-          if (response.status === 200) {
-            this.users.splice(this.users.findIndex(user => user.id === id), 1);
-          } else {
-            console.log(response.status);
-          }
+        .then(() => {
+          this.users.splice(this.users.findIndex(user => user.id === id), 1);
         })
         .catch(error => {
           console.log(error);

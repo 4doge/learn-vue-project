@@ -5,9 +5,18 @@ module.exports = {
   },
   extends: ['plugin:vue/recommended', '@vue/prettier'],
   rules: {
-    // indent: 'off',
-    // 'vue/script-indent': ['error', 2, { baseIndent: 1 }],
-    'vue/html-self-closing': false,
+    'vue/html-self-closing': [
+      'error',
+      {
+        html: {
+          void: 'never',
+          normal: 'always',
+          component: 'always'
+        },
+        svg: 'always',
+        math: 'always'
+      }
+    ],
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   },

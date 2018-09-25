@@ -2,11 +2,8 @@
   <div class="columns">
     <div class="column is-one-third">
       <div>
-        <div v-if="errorMessage">
-          <h1>{{ errorMessage }}</h1>
-        </div>
         <div
-          v-else
+          v-if="user"
           class="user">
           <h1>Edit user</h1>
           <form
@@ -148,6 +145,9 @@
               type="submit">Update</button>
           </form>
         </div>
+        <div v-else>
+          Loading ...
+        </div>
       </div>
     </div>
   </div>
@@ -160,34 +160,38 @@ import router from '@/router.js';
 export default {
   name: 'EditUser',
   data: () => ({
-    user: {},
+    user: null,
     errorMessage: ''
   }),
+  computed: {
+    id() {
+      return this.$route.params.id;
+    },
+    url() {
+      return `/users/${this.id}`;
+    }
+  },
   mounted() {
     this.getUser();
   },
   methods: {
     getUser() {
       http
-        .get(`/users/${this.$route.params.id}`)
+        .get(this.url)
         .then(response => {
           this.user = response.data;
         })
         .catch(error => {
-          this.errorMessage = error.response.statusText;
+          console.log(error);
         });
     },
     updateUser() {
       http
-        .put(`/users/${this.$route.params.id}`, this.user)
-        .then(response => {
-          if (response.status === 200) {
-            router.push({
-              name: 'users'
-            });
-          } else {
-            console.log(response.statusText);
-          }
+        .put(this.url, this.user)
+        .then(() => {
+          router.push({
+            name: 'users'
+          });
         })
         .catch(error => {
           console.log(error);
