@@ -6,19 +6,19 @@
       aria-label="pagination">
       <router-link
         v-if="hasPreviousPage"
-        :to="'?_page=' + previousPageNumber"
+        :to="'?page=' + previousPageNumber + '&limit=' + usersPerPage"
         class="pagination-previous">Previous page</router-link>
       <router-link
         v-if="hasNextPage"
-        :to="'?_page=' + nextPageNumber"
+        :to="'?page=' + nextPageNumber + '&limit=' + usersPerPage"
         class="pagination-next">Next page</router-link>
       <ul class="pagination-list">
         <li
-          v-for="page in pages"
-          :key="page">
+          v-for="(page, index) in pages"
+          :key="index">
           <router-link
             v-if="page!=='...'"
-            :to="'?_page=' + page"
+            :to="'?page=' + page + '&limit=' + usersPerPage"
             :aria-lable="'Goto page ' + page "
             :class="{ 'pagination-link': true, 'is-current': pageNumber === page }">{{ page }}</router-link>
           <span 

@@ -10,7 +10,7 @@ module.exports = {
       {
         html: {
           void: 'never',
-          normal: 'always',
+          normal: 'never',
           component: 'always'
         },
         svg: 'always',

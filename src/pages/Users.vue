@@ -13,29 +13,36 @@
       {{ toggleTableButtonText }}
     </button>
     <hr>
-    <pagination
-      :page-number="pageNumber"
-      :users-per-page="usersPerPage"
-      :total-users="totalUsers"/>
-
-  </div>
-</template>
+    <div class="columns">
+      <div class="column is-four-fifths">
+        <pagination
+          :page-number="pageNumber"
+          :users-per-page="usersPerPage"
+          :total-users="totalUsers"/>
+      </div>
+      <div class="column is-half">
+        <limitation :limit="usersPerPage"/>
+      </div>
+    </div>
+</div></template>
 
 <script>
 import UsersList from '@/components/UsersList.vue';
 import Pagination from '@/components/Pagination.vue';
+import Limitation from '@/components/Limitation.vue';
 import http from '@/utils/http.js';
 
 export default {
   name: 'UsersPage',
   components: {
     'users-list': UsersList,
-    pagination: Pagination
+    pagination: Pagination,
+    limitation: Limitation
   },
   data: () => ({
     showUsersTable: true,
     users: [],
-    usersPerPage: 5,
+    defaultUsersPerPage: 5,
     totalUsers: 0,
     defaultPageNumber: 1
   }),
@@ -47,7 +54,10 @@ export default {
       return this.showUsersTable ? 'Hide' : 'Show';
     },
     pageNumber() {
-      return parseInt(this.$route.query._page) || this.defaultPageNumber;
+      return parseInt(this.$route.query.page) || this.defaultPageNumber;
+    },
+    usersPerPage() {
+      return parseInt(this.$route.query.limit) || this.defaultUsersPerPage;
     }
   },
   watch: {
@@ -55,6 +65,15 @@ export default {
       console.log('Users loaded');
     },
     pageNumber() {
+      this.listUsers();
+    },
+    usersPerPage() {
+      this.$router.push({
+        query: {
+          page: 1,
+          limit: this.usersPerPage
+        }
+      });
       this.listUsers();
     }
   },

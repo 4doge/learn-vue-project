@@ -19,7 +19,6 @@
 
 <script>
 import http from '@/utils/http.js';
-import router from '@/router.js';
 import UserForm from '@/components/UserForm.vue';
 
 export default {
@@ -57,7 +56,7 @@ export default {
       http
         .put(this.url, this.user)
         .then(() => {
-          router.push({
+          this.$router.push({
             name: 'users'
           });
         })
