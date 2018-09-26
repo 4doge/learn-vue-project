@@ -104,19 +104,8 @@
           type="text">
       </div>
     </div>
-    <div class="field">
-      <label
-        for="phone"
-        class="label">Photo</label>
-      <div class="control">
-        <input
-          id="photo"
-          v-model="user.photo"
-          class="input is-small"
-          name="photo"
-          type="text">
-      </div>
-    </div>
+    <b>Photo:</b> {{ user.photo }}
+    <imgur-upload v-model="user.photo"/>
     <div class="field">
       <label
         for="isActive"
@@ -134,8 +123,13 @@
 </template>
 
 <script>
+import ImgurUpload from '@/components/ImgurUpload.vue';
+
 export default {
   name: 'UserForm',
+  components: {
+    'imgur-upload': ImgurUpload
+  },
   props: {
     user: {
       type: Object,
