@@ -4,7 +4,7 @@
       <option
         v-for="(option, index) in options"
         :key="index"
-        :selected="option == limit"
+        :selected="option == usersPerPage"
         :value="option">{{ option }}</option>
     </select>
   </div>
@@ -14,8 +14,12 @@
 export default {
   name: 'Limitation',
   props: {
-    limit: {
+    usersPerPage: {
       type: Number,
+      required: true
+    },
+    searchKeyword: {
+      type: String,
       required: true
     }
   },
@@ -27,7 +31,8 @@ export default {
       this.$router.push({
         query: {
           page: 1,
-          limit: value
+          limit: value,
+          q: this.searchKeyword
         }
       });
     }

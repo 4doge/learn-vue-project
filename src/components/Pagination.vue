@@ -6,11 +6,11 @@
       aria-label="pagination">
       <router-link
         v-if="hasPreviousPage"
-        :to="'?page=' + previousPageNumber + '&limit=' + usersPerPage"
+        :to="previousPageUrl"
         class="pagination-previous">Previous page</router-link>
       <router-link
         v-if="hasNextPage"
-        :to="'?page=' + nextPageNumber + '&limit=' + usersPerPage"
+        :to="nextPageUrl"
         class="pagination-next">Next page</router-link>
       <ul class="pagination-list">
         <li
@@ -18,7 +18,7 @@
           :key="index">
           <router-link
             v-if="page!=='...'"
-            :to="'?page=' + page + '&limit=' + usersPerPage"
+            :to="pageUrl(page)"
             :aria-lable="'Goto page ' + page "
             :class="{ 'pagination-link': true, 'is-current': pageNumber === page }">{{ page }}</router-link>
           <span 
@@ -47,6 +47,10 @@ export default {
     pageNumber: {
       type: Number,
       required: true
+    },
+    searchKeyword: {
+      type: String,
+      required: true
     }
   },
   computed: {
@@ -67,6 +71,17 @@ export default {
     },
     nextPageNumber() {
       return this.pageNumber + 1;
+    },
+    nextPageUrl() {
+      return `?page=${this.nextPageNumber}&limit=${this.usersPerPage}&q=${this.searchKeyword}`;
+    },
+    previousPageUrl() {
+      return `?page=${this.previousPageNumber}&limit=${this.usersPerPage}&q=${this.searchKeyword}`;
+    }
+  },
+  methods: {
+    pageUrl(page) {
+      return `?page=${page}&limit=${this.usersPerPage}&q=${this.searchKeyword}`;
     }
   }
 };
